@@ -1,0 +1,151 @@
+﻿@model Invoice.Models.InvoiceFactor
+
+@{
+    ViewData["Title"] = "خانه";
+    
+}
+
+
+
+<form asp-action="ShowInvoice" asp-controller="Home" method="post" class="saler_form">
+    <br /><br />
+    <div class="saler">
+
+        <h3>مشخصات فروشنده</h3>
+
+        نام ( شخص حقیقی / حقوقی ) :
+        <input asp-for="SalerName" type="text">
+        شماره اقتصادی :
+        <input asp-for="SalerEconomicNumber" type="text">
+        شماره ثبت :
+        <input asp-for="SalerRegisterNumber" type="text">
+        <br>
+        نشانی کامل استان :
+        <input asp-for="SalerState" class="input_city" type="text">
+        شهرستان :
+        <input asp-for="SalerCity" class="input_city" type="text">
+        کد پستی :
+        <input asp-for="SalerPostalCode" type="text">
+        تلفن :
+        <input asp-for="SalerPhone" type="text">
+        <br>
+        آدرس پستی :
+        <input asp-for="SalerAddress" class="input_adress" type="text">
+        شماره ملی :
+        <input asp-for="SalerNationCode" type="text">
+        فکس :
+        <input asp-for="SalerFax" type="text">
+
+    </div>
+
+    <div class="costumer">
+
+        <h3>مشخصات خریدار</h3>
+
+        نام ( شخص حقیقی / حقوقی ) :
+        <input asp-for="CustomerName" type="text">
+        شماره اقتصادی :
+        <input asp-for="CustomerEconomicNumber" type="text">
+        شماره ثبت :
+        <input asp-for="CustomerRegisterNumber" type="text">
+        <br>
+        نشانی کامل استان :
+        <input asp-for="CustomerState" class="input_city" type="text">
+        شهرستان :
+        <input asp-for="CustomerCity" class="input_city" type="text">
+        کد پستی :
+        <input asp-for="CustomerPostalCode" type="text">
+        تلفن :
+        <input asp-for="CustomerPhone" type="text">
+        <br>
+        آدرس پستی :
+        <input asp-for="CustomerAddress" class="input_adress" type="text">
+        شماره ملی :
+        <input asp-for="CustomerNationCode" type="text">
+        فکس :
+        <input asp-for="CustomerFax" type="text">
+
+    </div>
+
+    <div class="factor">
+        <br /><br /><br />
+        <h3>مشخصات کالا</h3>
+
+
+        <table id="table">
+            <tr>
+                <th>ردیف</th>
+                <th>کد کالا</th>
+                <th>نام/شرح کالا</th>
+                <th>تعداد</th>
+                <th>مبلغ کالا</th>
+                <th>تخفیف</th>
+                <th>مالیات بر ارزش افزوده</th>
+                <th>جمع کل</th>
+                <th>جمع کل پس از تخفیف</th>
+                <th>جمع کل پس از مالیات</th>
+                <th><button id="noprint" class="Add_Btn" onclick="AddRow()"><i class="fa fa-plus"></i></button></th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td class="calculate" contenteditable="true"></td>
+                <td class="calculate" contenteditable="true"></td>
+                <td class="calculate" contenteditable="true"></td>
+                <td class="calculate" contenteditable="true"></td>
+                <td class="calculate" contenteditable="true"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <button class='Del_Btn' id="noprint" onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button class='Down_Row' id="noprint" onclick='DownRow(this)'>
+                        <i class='fa fa-arrow-down'></i>
+                    </button><button class='Up_Row' id='noprint'
+                                     onclick='UpRow(this)'>
+                        <i class='fa fa-arrow-up'></i>
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5">جمع کل</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="5">مبلغ به حروف</td>
+                <td colspan="6"></td>
+
+            </tr>
+        </table>
+        <br>
+        <div class="desc">
+
+            توضیحات :
+            <input type="text">
+            <br><br>
+            <p>امضای خریدار  :</p>
+
+            <p>امضای فروشنده  :</p>
+            <br><br><br>
+
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <input class="btn-submit" type="submit" value="ثبت" />
+
+    <br /><br /><br />
+</form>
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body dir="rtl">
+
+
+    <div id="Wrapper">
+
+        <header id="Header" class="wide_wrap">
+
+            <img class="logo" src="~/images/logo.png" alt="لوگو">
+
+            <h1 class="text_header">فاکتور فروش</h1>
+            <br><br><br><br><br>
+
+        </header>
+
+        <div id="Container" class="wide_wrap">
+           @RenderBody()
+        </div>
+
+        <footer id="Footer" class="wide_wrap">
+
+            <h2>بهترین تجربه فاکتور فروش آنلاین</h4>
+
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
