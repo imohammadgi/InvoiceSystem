@@ -1,6 +1,7 @@
 ﻿using Invoice.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,19 +23,17 @@ namespace Invoice.Controllers
         {
             return View();
         }
-        
+
         public IActionResult ShowInvoice()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult ShowInvoice(InvoiceFactor model)
+        public IActionResult ShowInvoice(string data)
         {
-            var InvoicemManage = new InvoiceFactor
-            {
-                
-            };
-            return View(model);
+            var result = JsonConvert.DeserializeObject<ResultViewModel>(data);
+            
+            return View(result);
         }
 
 

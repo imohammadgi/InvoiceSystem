@@ -1,4 +1,4 @@
-﻿@model Invoice.Models.InvoiceFactor
+﻿@model Invoice.Models.SalerAndCustomer
 
 @{
     ViewData["Title"] = "خانه";
@@ -84,7 +84,7 @@
                 <th>جمع کل</th>
                 <th>جمع کل پس از تخفیف</th>
                 <th>جمع کل پس از مالیات</th>
-                <th><button id="noprint" class="Add_Btn" onclick="AddRow()"><i class="fa fa-plus"></i></button></th>
+                <th><button type="button" id="noprint" class="Add_Btn" onclick="AddRow()"><i class="fa fa-plus"></i></button></th>
             </tr>
             <tr>
                 <td>1</td>
@@ -98,9 +98,9 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <button class='Del_Btn' id="noprint" onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button class='Down_Row' id="noprint" onclick='DownRow(this)'>
+                    <button type="button" class='Del_Btn' id="noprint" onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button type="button" class='Down_Row' id="noprint" onclick='DownRow(this)'>
                         <i class='fa fa-arrow-down'></i>
-                    </button><button class='Up_Row' id='noprint'
+                    </button><button type="button" class='Up_Row' id='noprint'
                                      onclick='UpRow(this)'>
                         <i class='fa fa-arrow-up'></i>
                     </button>
@@ -139,7 +139,7 @@
         <br>
     </div>
 
-    <input class="btn-submit" type="submit" value="ثبت" />
+    <input class="btn-submit" onclick="TableArray()" type="submit" value="ثبت" />
 
     <br /><br /><br />
 </form>

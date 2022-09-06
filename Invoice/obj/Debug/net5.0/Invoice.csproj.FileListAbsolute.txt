@@ -113,3 +113,4 @@ C:\Users\dev-04\Source\Repos\Invoice\Invoice\bin\Debug\net5.0\zh-Hant\Microsoft.
 C:\Users\dev-04\Source\Repos\Invoice\Invoice\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\dev-04\Source\Repos\Invoice\Invoice\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\dev-04\Source\Repos\Invoice\Invoice\obj\Debug\net5.0\Razor\Views\Home\ShowInvoice.cshtml.g.cs
+C:\Users\dev-04\Source\Repos\Invoice\Invoice\obj\Debug\net5.0\Invoice.csprojAssemblyReference.cache

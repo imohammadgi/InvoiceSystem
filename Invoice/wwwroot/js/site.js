@@ -22,7 +22,7 @@ function AddRow() {
 
     cell1.innerHTML = lastRowIndex;
 
-
+    
     cell2.classList.add('calculate');
     cell3.classList.add('calculate');
     cell4.classList.add('calculate');
@@ -31,13 +31,15 @@ function AddRow() {
     cell4.innerHTML = 0;
     cell5.innerHTML = 0;
     cell6.innerHTML = 0;
+    
     cell2.contentEditable = true;
     cell3.contentEditable = true;
     cell4.contentEditable = true;
     cell5.contentEditable = true;
     cell6.contentEditable = true;
+  
     cell11.innerHTML =
-        "<button class='Del_Btn'id='noprint'  onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button class='Down_Row' id='noprint' onclick='DownRow(this)' ><i class='fa fa-arrow-down'></i></button><button class='Up_Row' id='noprint' onclick='UpRow(this)' ><i class='fa fa-arrow-up'></i></button> ";
+        "<button type='button' class='Del_Btn'id='noprint'  onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button type='button' class='Down_Row' id='noprint' onclick='DownRow(this)' ><i class='fa fa-arrow-down'></i></button><button type='button' class='Up_Row' id='noprint' onclick='UpRow(this)' ><i class='fa fa-arrow-up'></i></button> ";
     Setcalctotd();
 }
 
@@ -105,10 +107,10 @@ function calculate() {
 
     for (var i = 1; i < table.rows.length - 2; i++) {
         //محاسبه ردیف
-        rowAmount = (parseFloat(table.rows[i].cells.item(3).innerHTML)) * (parseFloat(table.rows[i].cells.item(4).innerHTML));
-        rowDiscount = (parseFloat(table.rows[i].cells.item(7).innerHTML)) - (parseFloat(table.rows[i].cells.item(5).innerHTML));
-        Tax = (parseFloat(table.rows[i].cells.item(8).innerHTML) / 100) * 9;
-        rowTax = parseFloat(table.rows[i].cells.item(8).innerHTML) + parseFloat(table.rows[i].cells.item(6).innerHTML);
+        rowAmount = (parseInt(table.rows[i].cells.item(3).innerHTML)) * (parseInt(table.rows[i].cells.item(4).innerHTML));
+        rowDiscount = (parseInt(table.rows[i].cells.item(7).innerHTML)) - (parseInt(table.rows[i].cells.item(5).innerHTML));
+        Tax = (parseInt(table.rows[i].cells.item(8).innerHTML) / 100) * 9;
+        rowTax = parseInt(table.rows[i].cells.item(8).innerHTML) + parseInt(table.rows[i].cells.item(6).innerHTML);
 
         rowAmount = isNaN(rowAmount) ? 0 : parseInt(rowAmount);
         rowDiscount = isNaN(rowDiscount) ? 0 : parseInt(rowDiscount);
@@ -126,7 +128,7 @@ function calculate() {
         if (rowDiscount < 0) {
             alert("مبلغ تخفیف نباید بیشتر از مبلغ کالا باشد.")
             table.rows[i].cells.item(8).innerHTML = 0;
-            table.rows[i].cells.item(5).innerHTML = parseFloat(table.rows[i].cells.item(7).innerHTML) - 1;
+            table.rows[i].cells.item(5).innerHTML = parseInt(table.rows[i].cells.item(7).innerHTML) - 1;
         }
         else {
             table.rows[i].cells.item(8).innerHTML = rowDiscount;
@@ -135,11 +137,11 @@ function calculate() {
 
         // محاسبه جمع کل ها
 
-        totalAmount = totalAmount + parseFloat(table.rows[i].cells.item(7).innerHTML);
-        totalDiscount = totalDiscount + parseFloat(table.rows[i].cells.item(5).innerHTML);
-        totalTax = totalTax + parseFloat(table.rows[i].cells.item(6).innerHTML);
-        totalAfterDiscount = totalAfterDiscount + parseFloat(table.rows[i].cells.item(8).innerHTML);
-        totalAfterTax = totalAfterTax + parseFloat(table.rows[i].cells.item(9).innerHTML);
+        totalAmount = totalAmount + parseInt(table.rows[i].cells.item(7).innerHTML);
+        totalDiscount = totalDiscount + parseInt(table.rows[i].cells.item(5).innerHTML);
+        totalTax = totalTax + parseInt(table.rows[i].cells.item(6).innerHTML);
+        totalAfterDiscount = totalAfterDiscount + parseInt(table.rows[i].cells.item(8).innerHTML);
+        totalAfterTax = totalAfterTax + parseInt(table.rows[i].cells.item(9).innerHTML);
 
         totalDiscount = isNaN(totalDiscount) ? 0 : parseInt(totalDiscount);
     }
@@ -158,6 +160,59 @@ function calculate() {
     var persiannumber = (totalAfterTax).num2persian() + ' ' + 'ریال';
 
     table.rows[lastIndex - 1].cells.item(1).innerHTML = persiannumber;
+}
+
+
+function TableArray() {
+
+    var table = document.getElementById("table");
+    var lastIndex = table.rows.length;
+
+    var ProductCode = [];
+    var ProductName = [];
+    var ProductCount = [];
+    var ProductFee = [];
+    var ProductDiscount = [];
+
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(1).innerHTML;
+        ProductCode.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(2).innerHTML;
+        ProductName.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(3).innerHTML;
+        ProductCount.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(4).innerHTML;
+        ProductFee.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(5).innerHTML;
+        ProductDiscount.push(a);
+    }
+
+    const obj = {
+        ProductCode: ProductCode, ProductName: ProductName, ProductCount: ProductCount,
+        ProductFee: ProductFee, ProductDiscount: ProductDiscount
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'Home/ShowInvoice',
+        data: { "data": JSON.stringify(obj) },
+        dataType: 'json',
+        success: function () {
+
+        },
+        error: function () {
+
+        }
+    });
+
 }
 
 
