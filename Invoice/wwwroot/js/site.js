@@ -173,6 +173,12 @@ function TableArray() {
     var ProductCount = [];
     var ProductFee = [];
     var ProductDiscount = [];
+    var ProductTax = [];
+    var ProductTotal = [];
+    var ProductTotalAfterDC = [];
+    var ProductTotalAfterTax = [];
+    var ProductResult = [];
+    
 
     for (var i = 1; i < lastIndex - 2; i++) {
         a = table.rows[i].cells.item(1).innerHTML;
@@ -194,16 +200,42 @@ function TableArray() {
         a = table.rows[i].cells.item(5).innerHTML;
         ProductDiscount.push(a);
     }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(6).innerHTML;
+        ProductTax.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(7).innerHTML;
+        ProductTotal.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(8).innerHTML;
+        ProductTotalAfterDC.push(a);
+    }
+    for (var i = 1; i < lastIndex - 2; i++) {
+        a = table.rows[i].cells.item(9).innerHTML;
+        ProductTotalAfterTax.push(a);
+    }
+    for (var i = 1; i <= 5; i++) {
+        a = table.rows[lastIndex - 2].cells.item(i).innerHTML;
+        ProductResult.push(a);
+    }
+    var Formdata=$("#form").serialize();
 
     const obj = {
         ProductCode: ProductCode, ProductName: ProductName, ProductCount: ProductCount,
-        ProductFee: ProductFee, ProductDiscount: ProductDiscount
+        ProductFee: ProductFee, ProductDiscount: ProductDiscount, ProductTax: ProductTax,
+        ProductTotal: ProductTotal, ProductTotalAfterDC: ProductTotalAfterDC, ProductTotalAfterTax: ProductTotalAfterTax,
+        ProductResult: ProductResult
     };
 
+    
+
     $.ajax({
+
         type: 'POST',
         url: 'Home/ShowInvoice',
-        data: { "data": JSON.stringify(obj) },
+        data: {"data": JSON.stringify(obj) },
         dataType: 'json',
         success: function () {
 
@@ -212,6 +244,8 @@ function TableArray() {
 
         }
     });
+
+  
 
 }
 
