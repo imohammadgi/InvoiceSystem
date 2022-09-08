@@ -179,6 +179,7 @@ function TableArray() {
     var ProductTotalAfterTax = [];
     var ProductResult = [];
     
+    
 
     for (var i = 1; i < lastIndex - 2; i++) {
         a = table.rows[i].cells.item(1).innerHTML;
@@ -220,13 +221,14 @@ function TableArray() {
         a = table.rows[lastIndex - 2].cells.item(i).innerHTML;
         ProductResult.push(a);
     }
-    var Formdata=$("#form").serialize();
+    var Formdata = $("#form").serialize();
+    
 
     const obj = {
         ProductCode: ProductCode, ProductName: ProductName, ProductCount: ProductCount,
         ProductFee: ProductFee, ProductDiscount: ProductDiscount, ProductTax: ProductTax,
         ProductTotal: ProductTotal, ProductTotalAfterDC: ProductTotalAfterDC, ProductTotalAfterTax: ProductTotalAfterTax,
-        ProductResult: ProductResult
+        ProductResult: ProductResult 
     };
 
     
@@ -235,7 +237,7 @@ function TableArray() {
 
         type: 'POST',
         url: 'Home/ShowInvoice',
-        data: {"data": JSON.stringify(obj) },
+        data: { "data": JSON.stringify(obj) + Formdata },
         dataType: 'json',
         success: function () {
 

@@ -28,6 +28,7 @@ namespace Invoice.Models
         public string CustomerAddress { get; set; }
         public int CustomerNationCode { get; set; }
         public int CustomerFax { get; set; }
+        string ProductCode { get; set; }
 
     }
 }
