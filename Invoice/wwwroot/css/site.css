@@ -57,7 +57,7 @@ body {
         border-bottom: 1px solid black;
     }
 
-    #Container input {
+    .saler input {
         border-radius: 5px;
         height: 30px;
         border: none;
@@ -65,6 +65,14 @@ body {
         font-size: 2rem;
         background-color: transparent;
     }
+.costumer input {
+    border-radius: 5px;
+    height: 30px;
+    border: none;
+    width: 150px;
+    font-size: 2rem;
+    background-color: transparent;
+}
 
 .input_city {
     width: 100px !important;
@@ -78,8 +86,9 @@ body {
     width: 700px !important;
 }
 
-#Container input:focus {
-    outline: 2px solid black !important;
+input:focus {
+    outline: 0 !important;
+    background-color: transparent;
 }
 
 .saler {
@@ -217,3 +226,27 @@ td {
     margin-left: auto;
     margin-right: auto;
 }
+
+#table input {
+    font-size: 2rem;
+    background-color: transparent;
+    height: 20px;
+    width: 90px;
+    border-radius: 0;
+    border: none;
+}
+.desc-txt {
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: transparent;
+    font-size: 2rem;
+    resize: none;
+}
+    .desc-txt:focus {
+        outline: 0 !important;
+        background-color: transparent;
+    }

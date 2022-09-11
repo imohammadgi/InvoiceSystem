@@ -2,11 +2,12 @@
 function AddRow() {
 
     var table = document.getElementById("table");
+
     var Rowid = table.rows.length - 2;
 
     var row = table.insertRow(Rowid);
 
-    const cell1 = row.insertCell(0);
+    var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
@@ -28,15 +29,13 @@ function AddRow() {
     cell4.classList.add('calculate');
     cell5.classList.add('calculate');
     cell6.classList.add('calculate');
-    cell4.innerHTML = 0;
-    cell5.innerHTML = 0;
-    cell6.innerHTML = 0;
-    
-    cell2.contentEditable = true;
-    cell3.contentEditable = true;
-    cell4.contentEditable = true;
-    cell5.contentEditable = true;
-    cell6.contentEditable = true;
+  
+
+    cell2.innerHTML = "<input class='calculate' name='Num1[]' type='text'>";
+    cell3.innerHTML = "<input class='calculate' name='Num2[]' type='text'>";
+    cell4.innerHTML = "<input class='calculate' name='Num3[]' type='text'>";
+    cell5.innerHTML = "<input class='calculate' name='Num4[]' type='text'>";
+    cell6.innerHTML = "<input class='calculate' name='Num5[]' type='text'>";
   
     cell11.innerHTML =
         "<button type='button' class='Del_Btn'id='noprint'  onclick='DelRow(this)'><i class='fa fa-minus'></i></button><button type='button' class='Down_Row' id='noprint' onclick='DownRow(this)' ><i class='fa fa-arrow-down'></i></button><button type='button' class='Up_Row' id='noprint' onclick='UpRow(this)' ><i class='fa fa-arrow-up'></i></button> ";
@@ -94,7 +93,7 @@ function calculate() {
 
     var table = document.getElementById("table");
     var lastIndex = table.rows.length;
-    var totalCount = 0;
+
     var totalDiscount = 0;
     var totalAmount = 0;
     var totalTax = 0;
@@ -107,19 +106,15 @@ function calculate() {
 
     for (var i = 1; i < table.rows.length - 2; i++) {
         //محاسبه ردیف
-        rowAmount = (parseInt(table.rows[i].cells.item(3).innerHTML)) * (parseInt(table.rows[i].cells.item(4).innerHTML));
-        rowDiscount = (parseInt(table.rows[i].cells.item(7).innerHTML)) - (parseInt(table.rows[i].cells.item(5).innerHTML));
-        Tax = (parseInt(table.rows[i].cells.item(8).innerHTML) / 100) * 9;
+        rowAmount = (parseInt(table.rows[i].cells.item(3).firstChild.value)) * (parseInt(table.rows[i].cells.item(4).firstChild.value));
+        rowDiscount = (parseInt(table.rows[i].cells.item(7).innerHTML)) - (parseInt(table.rows[i].cells.item(5).firstChild.value));
+        Tax = (parseInt(table.rows[i].cells.item(8).innerHTML) *9) /100;
         rowTax = parseInt(table.rows[i].cells.item(8).innerHTML) + parseInt(table.rows[i].cells.item(6).innerHTML);
-
+      
         rowAmount = isNaN(rowAmount) ? 0 : parseInt(rowAmount);
         rowDiscount = isNaN(rowDiscount) ? 0 : parseInt(rowDiscount);
         Tax = isNaN(Tax) ? 0 : parseInt(Tax);
         rowTax = isNaN(rowTax) ? 0 : parseInt(rowTax);
-
-
-
-
 
         table.rows[i].cells.item(6).innerHTML = Tax;
         table.rows[i].cells.item(7).innerHTML = rowAmount;
@@ -134,11 +129,10 @@ function calculate() {
             table.rows[i].cells.item(8).innerHTML = rowDiscount;
         }
 
-
         // محاسبه جمع کل ها
 
         totalAmount = totalAmount + parseInt(table.rows[i].cells.item(7).innerHTML);
-        totalDiscount = totalDiscount + parseInt(table.rows[i].cells.item(5).innerHTML);
+        totalDiscount = totalDiscount + parseInt(table.rows[i].cells.item(5).firstChild.value);
         totalTax = totalTax + parseInt(table.rows[i].cells.item(6).innerHTML);
         totalAfterDiscount = totalAfterDiscount + parseInt(table.rows[i].cells.item(8).innerHTML);
         totalAfterTax = totalAfterTax + parseInt(table.rows[i].cells.item(9).innerHTML);
@@ -146,16 +140,11 @@ function calculate() {
         totalDiscount = isNaN(totalDiscount) ? 0 : parseInt(totalDiscount);
     }
 
-
-
     table.rows[lastIndex - 2].cells.item(1).innerHTML = totalDiscount;
     table.rows[lastIndex - 2].cells.item(2).innerHTML = totalTax;
     table.rows[lastIndex - 2].cells.item(3).innerHTML = totalAmount;
     table.rows[lastIndex - 2].cells.item(4).innerHTML = totalAfterDiscount;
     table.rows[lastIndex - 2].cells.item(5).innerHTML = totalAfterTax;
-
-
-
 
     var persiannumber = (totalAfterTax).num2persian() + ' ' + 'ریال';
 
@@ -178,8 +167,6 @@ function TableArray() {
     var ProductTotalAfterDC = [];
     var ProductTotalAfterTax = [];
     var ProductResult = [];
-    
-    
 
     for (var i = 1; i < lastIndex - 2; i++) {
         a = table.rows[i].cells.item(1).innerHTML;
@@ -221,23 +208,19 @@ function TableArray() {
         a = table.rows[lastIndex - 2].cells.item(i).innerHTML;
         ProductResult.push(a);
     }
-    var Formdata = $("#form").serialize();
-    
-
+  
     const obj = {
         ProductCode: ProductCode, ProductName: ProductName, ProductCount: ProductCount,
         ProductFee: ProductFee, ProductDiscount: ProductDiscount, ProductTax: ProductTax,
         ProductTotal: ProductTotal, ProductTotalAfterDC: ProductTotalAfterDC, ProductTotalAfterTax: ProductTotalAfterTax,
-        ProductResult: ProductResult 
+        ProductResult: ProductResult
     };
-
-    
 
     $.ajax({
 
         type: 'POST',
         url: 'Home/ShowInvoice',
-        data: { "data": JSON.stringify(obj) + Formdata },
+        data: { "data": JSON.stringify(obj) },
         dataType: 'json',
         success: function () {
 
@@ -247,10 +230,7 @@ function TableArray() {
         }
     });
 
-  
-
 }
-
 
 window.addEventListener('load', (event) => {
     Setcalctotd();

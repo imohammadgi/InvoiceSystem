@@ -29,15 +29,15 @@ namespace Invoice.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ShowInvoice(SalerAndCustomer data)
+        public IActionResult ShowInvoice(string data)
         {
-            //if (data != null)
-            //{
-            //    var result = JsonConvert.DeserializeObject<ResultViewModel>(data);
-            //    var form = JsonConvert.DeserializeObject<SalerAndCustomer>(FormData);
-            //}
+            if (data != null)
+            {
+                var result = JsonConvert.DeserializeObject<ResultViewModel>(data);
+               
+            }
 
-        
+
 
             return View();
         }
